@@ -1,10 +1,16 @@
-import {Container, Profile, Search , Brand, Test, Logout } from "./styles"
+
+import {Container, Profile, Search , Brand, Test, Logout, Test2 } from "./styles"
 import { Input } from "../Input"
 import { useAuth } from "../../hooks/auth"
+import { api } from "../../services/api"
+import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 
 
 export function Header(){
   const {signOut, user} = useAuth()
+  
+  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
+  
   return(
     <Container>
       <Brand>
@@ -19,23 +25,27 @@ export function Header(){
       
       
       
-      
-    
+      <Test2>
+        
         <Test>
         <div>
-         <strong>Eduardo de Lima</strong>
-         <span><Logout onClick={signOut}/>Sair</span>
+         <strong>{user.name}</strong>
+         <Logout onClick={signOut}><p>Sair</p></Logout>
         </div>
-         </Test>
+        </Test>
 
       <Profile to="/profile">
       <img 
-        src="https://github.com/eduardoex.png " 
-        alt="foto do usuário"
+        src={avatarURL} 
+        alt={user.name}
+      
       />
       </Profile>
-      
+      </Test2>
 
     </Container>
   )
 }
+
+
+

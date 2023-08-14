@@ -3,7 +3,7 @@ import { FiArrowLeft } from "react-icons/fi"
 import { Input } from "../../Components/Input"
 import { Textarea } from "../../Components/Textarea"
 import { Link } from "react-router-dom"
-
+import { useState } from "react"
 
 import { MovieItem } from "../../Components/MovieItem"
 import { Section } from "../../Components/Section"
@@ -14,6 +14,19 @@ import { Button } from "../../Components/Button"
 import { Container, Form } from "./styles"
 
 export function New(){
+  const [tags, setTags] = useState([])
+  const [newTag, setNewTag] = useState("")
+
+function handleAddTag(){
+  setTags(prevState => [...prevState, newTag])
+  setNewTag("")
+}
+
+function handleRemoveTag(deleted){
+  setTags(prevState => prevState.filter(tag => tag !== deleted))
+  
+  }
+
   return(
     <Container>
       <Header/>
@@ -33,8 +46,23 @@ export function New(){
 
          <Section title="Marcadores">
           <div className="tags">
-          <MovieItem value="react"/>
-          <MovieItem $isNew placeholder="Novo Marcador"/>
+          {
+            tags.map((tag, index) => (
+            <MovieItem 
+            key={String(index)} 
+            value={tag}
+            onClick = {()  => handleRemoveTag(tag)}
+            
+            />
+            ))
+          }
+          <MovieItem
+           $isNew
+            placeholder="Novo Marcador"
+            onChange={e => setNewTag(e.target.value)}
+            value={newTag}
+            onClick={handleAddTag}
+            />
           </div>
          </Section>
 

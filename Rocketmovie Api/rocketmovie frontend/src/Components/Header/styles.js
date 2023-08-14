@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 import { Button } from "../Button"
 
+
 export const Container = styled.header`
 grid-area: header;
 
@@ -22,13 +23,14 @@ padding: 0 80px;
 
 
 
-export const Test = styled(Link)`
+export const Test = styled.div`
 > div {
   display: flex;
   flex-direction: column;
   margin-right: 16px;
   line-height: 24px;
-    span {
+
+    p {
       font-size: 14px;
       color: ${({ theme}) => theme.COLORS.GRAY_100};
       display: flex;
@@ -42,7 +44,14 @@ export const Test = styled(Link)`
       color: ${({ theme}) => theme.COLORS.WHITE}
     }
   }
+
+
 `
+
+export const Test2 = styled.div`
+display: flex;
+`
+
 
 export const Logout = styled(Link)``
 
