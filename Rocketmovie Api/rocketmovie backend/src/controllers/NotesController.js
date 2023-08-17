@@ -7,6 +7,9 @@ class NotesController{
   async create(request, response){
     let {title, description, rating, movieTags} = request.body;
     const user_id = request.user.id;
+    
+
+
     const [note_id] = await knex("movieNotes").insert({
       title,
       description,
@@ -15,7 +18,11 @@ class NotesController{
     });
    
     
-    rating = Number(rating)
+
+
+
+    
+   /* rating = Number(rating)
 
     
     if(Number.isInteger(rating)){}
@@ -30,11 +37,12 @@ class NotesController{
    }
    
  
-   rating = String(rating)
+   rating = String(rating)*/
 
 
     
     const movieTagsInsert = movieTags.map(name => {
+      
       return{
         note_id,
         name,
